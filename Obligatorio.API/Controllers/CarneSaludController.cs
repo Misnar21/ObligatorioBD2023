@@ -4,12 +4,12 @@ namespace Obligatorio.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class FuncionarioController : ControllerBase
+public class CarneSaludController : ControllerBase
 {
-    public FuncionarioController(){}
+    public CarneSaludController(){}
 
-    [HttpGet("[[GetAllFuncionario]]")]
-    public IEnumerable<Funcionario> GetAll()
+    [HttpGet("[[GetAllCarne]]")]
+    public IEnumerable<CarneSalud> GetAll()
     {
         throw new NotImplementedException();
     }

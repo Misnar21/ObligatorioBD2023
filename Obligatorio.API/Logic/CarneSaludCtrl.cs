@@ -2,26 +2,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Obligatorio.API.Logic;
 
-public class FuncionarioCtrl
+public class CarneSaludCtrl
 {
-    public FuncionarioCtrl(){}
-    public IEnumerable<Funcionario> GetAll()
+    public CarneSaludCtrl(){}
+    public IEnumerable<CarneSalud> GetAll()
     {
         throw new NotImplementedException();
     }
-    public Funcionario Get(int idFuncionario)
+    public CarneSalud Get(int idCarne)
     {
         throw new NotImplementedException();
     }
-    public int Add(Funcionario funcionario)
+    public int Add(CarneSalud carne)
     {
         throw new NotImplementedException();
     }
-    public bool Edit(Funcionario funcionario)
+    public bool Edit(CarneSalud carne)
     {
         throw new NotImplementedException();
     }
-    public int Delete(int idFuncionario)
+    public int Delete(int idCarne)
     {
         throw new NotImplementedException();
     }
