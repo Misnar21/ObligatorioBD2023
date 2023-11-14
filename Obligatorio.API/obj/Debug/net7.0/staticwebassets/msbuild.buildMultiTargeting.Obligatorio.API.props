@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Obligatorio.API.props" />
+</Project>

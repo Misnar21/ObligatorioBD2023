@@ -2,26 +2,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Obligatorio.API.Logic;
 
-public class FuncionarioCtrl
+public class AgendaCtrl
 {
-    public FuncionarioCtrl(){}
-    public IEnumerable<Funcionario> GetAll()
+    public AgendaCtrl(){}
+    public IEnumerable<Agenda> GetAll()
     {
         throw new NotImplementedException();
     }
-    public Funcionario Get(int idFuncionario)
+    public Agenda Get(int idAgenda)
     {
         throw new NotImplementedException();
     }
-    public int Add(Funcionario funcionario)
+    public int Add(Agenda agenda)
     {
         throw new NotImplementedException();
     }
-    public bool Edit(Funcionario funcionario)
+    public bool Edit(Agenda agenda)
     {
         throw new NotImplementedException();
     }
-    public int Delete(int idFuncionario)
+    public int Delete(int idAgenda)
     {
         throw new NotImplementedException();
     }
