@@ -13,61 +13,65 @@ export var funcionarios: { [clave: string]: Funcionario } = {};
 
 // loguear usuario
 router.post('/login', async (req, res) => {
+  let userID = ""
+  let pass = ""
   try {
-    let userID = req.body.administrador.id
-    let pass = req.body.administrador.contraseña
-    var token;
-    var userValidation = await metodos.login(userID, pass)
-
-    if (!userValidation.userValid) {
-      console.log("No existe ese usuario")
-      res.send(401).json(JSON.stringify({ "res": "No existe este usuario" }))
-    } else if (!userValidation.passValid) {
-      console.log("La contraseña no coincide con la del usuario")
-      res.send(401).json(JSON.stringify({ "res": "La contraseña no coincide con la del usuario" }))
-    } else {
-      // Buscamos el rol ahora
-      let rol = await metodos.buscarRol(userID);
-   
-      if (rol == "Admin") {
-        admins[userID] = new Administrador(userID, pass)
-      } else if (rol == "Funcionario") {
-        funcionarios[userID] = new Funcionario(userID, pass)
-      } 
-
-      //usuario valido, funcionario o administrador, le mando un token
-      if (rol == "Admin" || rol == "Funcionario") {
-        token = middleware.sign(userID);
-        res.status(200)
-        res.send(JSON.stringify({ "token": token }));
-      } else {
-        res.status(401)
-        res.send(JSON.stringify({"error": rol}));
-
-      }
-
-    }
-
+    userID = req.body.usuario.id
+    pass = req.body.usuario.contraseña
   } catch (error) {
-    //hubo un error de formato
+
+    // Error al pasar los datos
     res.status(400);
     res.send(JSON.stringify({ mensaje: "Error. Formato JSON invalido." }))
   }
-})
 
-//Ejemplo de uso del milddlaware
-/* router.get('/propuesta', middleware.verifyUser, async (req, res, next) => {
-  //devolver coleccion de propuestas
-  try {
-    const userId = middleware.decode(req.headers['authorization']).id;
-    res.status(200)
-    res.send(propuestas);
-  } catch (error) {
-    console.error(error);
-    res.status(500);
-    res.send(JSON.stringify({ mensaje: 'Error al ...' }))
+  if (userID != "" && pass != "") {
+    try {
+
+      var token;
+      var userValidation: any = await metodos.login(userID, pass)
+      console.log(userValidation)
+
+      if (!userValidation.userValid) {
+        console.log("No existe ese usuario")
+        res.status(401).json(JSON.stringify({ mensaje: "No existe este usuario" }))
+      } else if (!userValidation.passValid) {
+        console.log("La contraseña no coincide con la del usuario")
+        res.status(401)
+        res.send(JSON.stringify({ mensaje: "La contraseña no coincide con la del usuario" }));
+      } else {
+
+        // Buscamos el rol ahora
+        let rol = await metodos.buscarRol(userID);
+        console.log(rol)
+
+        if (rol == "Administrador") {
+          admins[userID] = new Administrador(userID, pass)
+        } else if (rol == "Usuario") {
+          funcionarios[userID] = new Funcionario(userID, pass)
+        }
+
+        //usuario valido, funcionario o administrador, le mando un token
+        if (rol == "Admin" || rol == "Usuario") {
+          token = middleware.sign(userID);
+          res.status(200)
+          res.send(JSON.stringify({ "token": token }));
+        } else {
+          res.status(401)
+          res.send(JSON.stringify({ "error, rol invalido": rol}));
+
+        }
+
+      }
+
+    } catch (error) {
+      console.log(error)
+      res.status(500);
+      res.send(JSON.stringify({ mensaje: "Error en el servidor" + error }))
+    }
   }
-}) */
+
+})
 
 
 export default router
