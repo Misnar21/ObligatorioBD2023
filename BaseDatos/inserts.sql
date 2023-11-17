@@ -1,8 +1,34 @@
 USE obligatorioBD;
 
-INSERT INTO Roles (Nombre) VALUES ('Adminstraodr'), ('Usuario');
+INSERT INTO Roles (Nombre) VALUES ('Administrador'), ('Usuario');
 
 INSERT INTO Logins (LogId, Pass) VALUES
+    ('juanperez123', '2a981f6b244aa876092076551a2b09a9'),
+    ('anagomez456', 'ae0ebaef78a2fa7f94572997fbbdea13'),
+    ('carlosrodriguez789', 'fff5cce8060b6a93d23923c915e84760'),
+    ('marialopez111', 'c9d4f2a5c91f15bf0ab9c12d39be1a29'),
+    ('pedrogarcia222', '65def8745ce49a1c70e1b821999382c2'),
+    ('lauramartinez333', '5b115a69063adc6a94dfa55305c25958'),
+    ('diegohernandez444', '1078acacc46c87b0fd28006a2d9e025a'),
+    ('silviafernandez555', '7a8fed48a1851340a6c8af992a84b9ee'),
+    ('martinpaz666', '04ead89304ddb5bb1845ee92b4eb5c32'),
+    ('elenaruiz777', '0a1b6c3b106ccf97a94ffc0e4c14fe8f'),
+    ('gabrielsantos888', 'df9c5a2e50980692be8340155fd9f952'),
+    ('adrianalima999', 'ed904205d20df9c710541849ff4efce4'),
+    ('fernandogomez000', '75bba7ff75fa292d45a902ea5ad8062e'),
+    ('florencia2003', '6e80f203f7adfa0757752bd3a22f8fe5'),
+    ('matias2001', '02fbef5a14ec45c0bc01913e2d8a3eba'),
+    ('agustin2004','4989c358c0f8acb03921074ab03abfdb');
+
+/*
+ Para probar login
+ 34567891, gabrielsantos888, contra: 5467GhIR
+
+ */
+/*
+ Lo que significa cada contraseña con su respectivo dueño
+
+ INSERT INTO Logins (LogId, Pass) VALUES
     ('juanperez123', '1234AbCd'),
     ('anagomez456', '4321DcBa'),
     ('carlosrodriguez789', '5678ZxCv'),
@@ -19,6 +45,8 @@ INSERT INTO Logins (LogId, Pass) VALUES
     ('florencia2003', 'lOfT2493'),
     ('matias2001', 'LqIP3465'),
     ('agustin2004','cLzV7134');
+ */
+
 
 
 INSERT INTO Funcionarios (Ci, Nombre, Apellido, Fch_Nacimiento, Dirección, Teléfono, Email, LogId)

@@ -7,6 +7,7 @@ Periodos_Actualizacion (Año, Semestre, Fch_Inicio, Fch_Fin)
 
  */
 
+drop database if exists obligatorioBD;
 CREATE DATABASE obligatorioBD;
 USE obligatorioBD;
 

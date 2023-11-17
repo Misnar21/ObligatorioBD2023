@@ -2,7 +2,8 @@
 import userRouter from './routes/user'
 import express from 'express';
 import { createServer } from "http";
-import db, {conectar} from './models/db'
+import db, { conectar } from './models/db'
+import { encrypt } from './encripter';
 
 
 
@@ -34,6 +35,9 @@ app.use(cors(corsOptions));
 /* Endpoints para trabajar con las solicitudes */
 app.get('/test', (req: any, res: any) => {
     console.log("hello world");
+    const plaintext = 'Hola, este es un mensaje secreto.';
+    const encryptedText = encrypt(plaintext);
+    console.log('Texto cifrado:', encryptedText);
     res.send('V 1.1')
 })
 
@@ -50,7 +54,7 @@ async function run() {
         conectar()
         // Connect the client to the server
         httpServer.listen(PORT, HOST, () => {
-            console.log(`Server running on port ${PORT} estas compilando cornudo?`)
+            console.log(`Server running on port ${PORT}`)
         })
 
     } catch (error) {
