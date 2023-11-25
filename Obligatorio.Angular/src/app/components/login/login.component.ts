@@ -5,7 +5,6 @@ import { Route, Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
 
@@ -13,6 +12,8 @@ export class LoginComponent {
 
   user = "";
   password = "";
+
+  userExist = true
 
   login() {
     const userCredentials = { id: this.user, password: this.password };
@@ -26,7 +27,11 @@ export class LoginComponent {
       },
       (error) => {
         if (error.status === 401) {
-          alert("Error: contraseña o usario incorrecto");
+          this.userExist = false
+          this.user = ""
+          this.password = ""
+
+       /*    alert("Error: contraseña o usario incorrecto"); */
         }
         console.error(error);
       }

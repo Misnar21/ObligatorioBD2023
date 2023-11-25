@@ -15,9 +15,22 @@ export class SignUpComponent {
 
   userValid = true
   passValid = true
+  
+  ci: number = 0
+  nombreCompleto: string = ""
+  fechaNacimiento = new Date()
+  carnet: File | undefined
+  tieneCarnet = false
+  fechaVencimientoCarnet = new Date()
+  fechaEmisionCarnet = new Date()
+  docimicilio: string  = ""
+  correo: string = ""
+  telefono: string = ""
 
   userReasonsInvalid: string[] = [];
   passReasonsInvalid: string[] = [];
+  archivoValido = false;
+
 
   showUserInvalidMessage(){
     let message = "  s"
@@ -86,5 +99,18 @@ export class SignUpComponent {
       this.servicioRegistro.signUp(this.user, this.pass);
       this.router.navigate(['/................']);
     }
+  }
+
+
+  onFileSelected(event: any) {
+    let archivo = event.target;
+    if (archivo.files && archivo.files[0]) {
+      let file = archivo.files[0];
+      let extension = file.name.split('.').pop().toLowerCase();
+      if ( extension == 'jpg' || extension == 'pdf'){
+          this.archivoValido = true
+          this.carnet = archivo
+      }      
+    } 
   }
 }

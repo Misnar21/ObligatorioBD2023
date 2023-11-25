@@ -40,7 +40,13 @@ export class LogInService {
     this.cookies.delete("userID");
     this.cookies.delete("token");
   }
+
   signUp(user: String, pass: String){
+    let datos = {
+      userID: user,
+      password: pass
+    }
+    return this.http.post("........", datos);
     
   }
 }
