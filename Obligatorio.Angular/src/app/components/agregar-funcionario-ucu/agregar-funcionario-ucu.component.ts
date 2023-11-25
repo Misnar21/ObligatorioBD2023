@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./agregar-funcionario-ucu.component.css']
 })
 export class AgregarFuncionarioUcuComponent {
-
+  
 }
