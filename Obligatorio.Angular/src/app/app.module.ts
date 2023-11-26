@@ -8,9 +8,7 @@ import { AgendarFechaComponent } from './components/agendar-fecha/agendar-fecha.
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
-import { AgregarFuncionarioUcuComponent } from './components/agregar-funcionario-ucu/agregar-funcionario-ucu.component';
 import { AgregarPeriodoActualizacionComponent } from './components/agregar-periodo-actualizacion/agregar-periodo-actualizacion.component';
-import { RegistrarUsuarioComponent } from './components/registrar-usuario/registrar-usuario.component';
 import { FormularioComponent } from './components/formulario/formulario.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
@@ -26,9 +24,7 @@ import { CommonModule } from '@angular/common';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    AgregarFuncionarioUcuComponent,
     AgregarPeriodoActualizacionComponent,
-    RegistrarUsuarioComponent,
     FormularioComponent,
     SignUpComponent
   ],

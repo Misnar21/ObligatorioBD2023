@@ -1,1 +1,94 @@
-<p>actualizar-funcionario works!</p>
+<div class="container">
+    <h2>Registrarse</h2>
+    <form (ngSubmit)="onSubmit(updateForm)" #updateForm="ngForm">
+        
+        <div *ngIf="formularioInvalido">
+            <p>{{messageFormError}}</p>
+        </div>
+        
+            <div class="form-group">
+                <label for="ci">CI:</label>
+                <input type="text" class="form-control" id="ci"
+                    required name="ci">
+                <div *ngIf="ciReasonsInvalid.length != 0">
+                    <span class="message-error">La cédula de identidad no cumple
+                        con el
+                        formato
+                        {{showCIInvalidMessage()}}</span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="nombreCompleto">Nombre completo:</label>
+                <input type="text" class="form-control" id="nombreCompleto"
+                    name="nombreCompleto"
+                    required>
+                <div *ngIf="nombreCompletoReasonsInvalid.length != 0">
+                    <span class="message-error">El nombre no cumple con el
+                        formato
+                        {{showNameInvalidMessage()}}</span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="fch_nacimiento">Fecha nacimiento:</label>
+                <input type="date" class="form-control" id="fch_nacimiento"
+                    name="fch_nacimiento"
+                    required>
+                <div *ngIf="fechaNacimientoReasonsInvalid.length != 0">
+                    <span class="message-error">La fecha de nacimiento no es
+                        valida para un funcionaro de la UCU:
+                        {{showBornDateInvalidMessage()}}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="fch_nacimiento">¿Tiene carnet?</label>
+                <p> <input type="radio" name="siTiene" id="siTiene"
+                        [ngModel]="tieneCarnet"> Si</p>
+                <p> <input type="radio" name="noTiene" id="noTiene"> No</p>
+            </div>
+            <div class="form-group" *ngIf="tieneCarnet">
+                <p>Datos del carnet</p>
+                <div class="form-group">
+                    <label for="fechaEmision">Fecha Emisión:</label>
+                    <input type="date" class="form-control" id="fechaEmision"
+                        name="fechaEmision"
+                        [required]="tieneCarnet">
+                    <div *ngIf="fechaEmisionReasonsInvalid.length != 0">
+                        <span class="message-error">La fecha de emisión
+                            proporcionada es invalida:
+                            {{showStartDateInvalidMessage()}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fechaVencimiento">Fecha vencimiento:</label>
+                    <input type="date" class="form-control"
+                        id="fechaVencimiento"
+                        name="fechaVencimiento"
+                        [required]="tieneCarnet">
+                    <div *ngIf="fechaVencimientoReasonsInvalid.length != 0">
+                        <span class="message-error">La fecha de emisión
+                            proporcionada es invalida:
+                            {{showEndDateInvalidMessage()}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="carnet">Comprobante</label>
+                    <input [required]="tieneCarnet" type="file" id="carnet"
+                        (change)="onFileSelected($event)" accept=".jpg, .pdf" />
+                    <div *ngIf="!archivoValido || carnet == undefined">
+                        <span class="message-error"> Error al subir el archivo: 
+                            {{showVoucherInvalidMessage()}}</span>
+                    </div>
+                </div>
+            </div>
+
+           <app-agendar-fecha *ngIf="!tieneCarnet" ></app-agendar-fecha>
+
+        <input type="submit" value="Registrarse">
+    </form>
+    <br>
+    <br>
+    <button class="join-button" routerLink="/">Volver</button>
+</div>

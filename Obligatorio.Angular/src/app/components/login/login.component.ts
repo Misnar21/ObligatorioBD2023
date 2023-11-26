@@ -20,9 +20,17 @@ export class LoginComponent {
     this.loginService.login(userCredentials).subscribe(
       (data) => {
         if (data && data.token) {
+        
           this.loginService.setToken(data.token);
           this.loginService.setUserData(this.user);
-          this.router.navigateByUrl('/formulario');
+
+          if(data.rol != undefined && data.rol == "admin"){
+            this.router.navigateByUrl('/agregarPeriodo');
+          }
+
+          if(data.rol != undefined && data.rol == "funcionario"){
+            this.router.navigateByUrl('/actualizarDatos');
+          }
         }
       },
       (error) => {
@@ -30,8 +38,7 @@ export class LoginComponent {
           this.userExist = false
           this.user = ""
           this.password = ""
-
-       /*    alert("Error: contraseña o usario incorrecto"); */
+          alert("Error: contraseña o usario incorrecto");
         }
         console.error(error);
       }
