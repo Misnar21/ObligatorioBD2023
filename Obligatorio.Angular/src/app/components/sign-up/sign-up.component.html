@@ -10,7 +10,7 @@
             <input type="text" class="form-control" id="usuario" name="usuario"
                 required name="usuario">
             <div *ngIf="!userValid">
-                <span class="message-error">El formato del usuario no es valido: 
+                <span class="message-error">El formato del usuario no es valido:
                     {{showUserInvalidMessage()}}</span>
             </div>
         </div>
@@ -31,126 +31,128 @@
         <div>
             <label>Elija un rol</label>
             <p>
-                <label> <input type="radio" name="admin" id="admin"
-                        [(ngModel)]="serAdmin"> Administrador</label>
-                <label> <input type="radio" name="funcionario" id="funcionario"
-                        [(ngModel)]="serFuncionario"> Funcionario</label>
+                <label> <input type="radio" name="option_rol" 
+                        value="Admin" [(ngModel)]="rol" (change)="setRol('Admin')"> Administrador </label>
+
+                <label> <input type="radio" name="option_rol" 
+                        value="Funcionario" [(ngModel)]="rol" (change)="setRol('Funcionario')"> Funcionario</label>
+
             </p>
         </div>
 
-        
-            <div class="form-group">
-                <label for="ci">CI:</label>
-                <input type="text" class="form-control" id="ci"
-                    required name="ci">
-                <div *ngIf="ciReasonsInvalid.length != 0">
-                    <span class="message-error">La cédula de identidad no cumple
-                        con el
-                        formato
-                        {{showCIInvalidMessage()}}</span>
-                </div>
-
-            </div>
-            <div class="form-group">
-                <label for="nombreCompleto">Nombre cmpleto:</label>
-                <input type="text" class="form-control" id="nombreCompleto"
-                    name="nombreCompleto"
-                    required>
-                <div *ngIf="nombreCompletoReasonsInvalid.length != 0">
-                    <span class="message-error">El nombre no cumple con el
-                        formato
-                        {{showNameInvalidMessage()}}</span>
-                </div>
-
-            </div>
-            <div class="form-group">
-                <label for="fch_nacimiento">Fecha nacimiento:</label>
-                <input type="date" class="form-control" id="fch_nacimiento"
-                    name="fch_nacimiento"
-                    required>
-                <div *ngIf="fechaNacimientoReasonsInvalid.length != 0">
-                    <span class="message-error">La fecha de nacimiento no es
-                        valida para un funcionaro de la UCU:
-                        {{showBornDateInvalidMessage()}}</span>
-                </div>
+        <div class="form-group">
+            <label for="ci">CI:</label>
+            <input type="text" class="form-control" id="ci"
+                required name="ci">
+            <div *ngIf="ciReasonsInvalid.length != 0">
+                <span class="message-error">La cédula de identidad no cumple
+                    con el
+                    formato
+                    {{showCIInvalidMessage()}}</span>
             </div>
 
-            <div class="form-group">
-                <label for="fch_nacimiento">¿Tiene carnet?</label>
-                <p> <input type="radio" name="siTiene" id="siTiene"
-                        [ngModel]="tieneCarnet"> Si</p>
-                <p> <input type="radio" name="noTiene" id="noTiene"> No</p>
-            </div>
-            <div class="form-group" *ngIf="tieneCarnet">
-                <p>Datos del carnet</p>
-                <div class="form-group">
-                    <label for="fechaEmision">Fecha Emisión:</label>
-                    <input type="date" class="form-control" id="fechaEmision"
-                        name="fechaEmision"
-                        [required]="tieneCarnet">
-                    <div *ngIf="fechaEmisionReasonsInvalid.length != 0">
-                        <span class="message-error">La fecha de emisión
-                            proporcionada es invalida:
-                            {{showStartDateInvalidMessage()}}</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="fechaVencimiento">Fecha vencimiento:</label>
-                    <input type="date" class="form-control"
-                        id="fechaVencimiento"
-                        name="fechaVencimiento"
-                        [required]="tieneCarnet">
-                    <div *ngIf="fechaVencimientoReasonsInvalid.length != 0">
-                        <span class="message-error">La fecha de emisión
-                            proporcionada es invalida:
-                            {{showEndDateInvalidMessage()}}</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="carnet">Comprobante</label>
-                    <input [required]="tieneCarnet" type="file" id="carnet"
-                        (change)="onFileSelected($event)" accept=".jpg, .pdf" />
-                    <div *ngIf="!archivoValido || carnet == undefined">
-                        <span class="message-error"> Error al subir el archivo:
-                            {{showVoucherInvalidMessage()}}</span>
-                    </div>
-                </div>
+        </div>
+        <div class="form-group">
+            <label for="nombreCompleto">Nombre cmpleto:</label>
+            <input type="text" class="form-control" id="nombreCompleto"
+                name="nombreCompleto"
+                required>
+            <div *ngIf="nombreCompletoReasonsInvalid.length != 0">
+                <span class="message-error">El nombre no cumple con el
+                    formato
+                    {{showNameInvalidMessage()}}</span>
             </div>
 
+        </div>
+        <div class="form-group">
+            <label for="fch_nacimiento">Fecha nacimiento:</label>
+            <input type="date" class="form-control" id="fch_nacimiento"
+                name="fch_nacimiento"
+                required>
+            <div *ngIf="fechaNacimientoReasonsInvalid.length != 0">
+                <span class="message-error">La fecha de nacimiento no es
+                    valida para un funcionaro de la UCU:
+                    {{showBornDateInvalidMessage()}}</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="fch_nacimiento">¿Tiene carnet?</label>
+            <p> <input type="radio" name="option_carnet" (change)="setTieneCarnet(true)"
+                value="true" [ngModel]="tieneCarnet"> Si</p>
+            <p> <input type="radio" name="option_carnet"  (change)="setTieneCarnet(false)"
+                  value="false" [ngModel]="tieneCarnet"> No</p>
+        </div>
+        <div class="form-group" *ngIf="tieneCarnet">
+            <p>Datos del carnet</p>
             <div class="form-group">
-                <label for="domicilio">Domicilio completo de residencia:</label>
-                <input type="text" class="form-control" id="domicilio"
-                    name="domicilio" required>
-                <div *ngIf="domicilioReasonsInvalid.length != 0">
-                    <span class="message-error">El formato del domicilio no es
-                        valido:
-                        {{showAddressInvalidMessage()}}</span>
+                <label for="fechaEmision">Fecha Emisión:</label>
+                <input type="date" class="form-control" id="fechaEmision"
+                    name="fechaEmision"
+                    [required]="tieneCarnet">
+                <div *ngIf="fechaEmisionReasonsInvalid.length != 0">
+                    <span class="message-error">La fecha de emisión
+                        proporcionada es invalida:
+                        {{showStartDateInvalidMessage()}}</span>
                 </div>
             </div>
             <div class="form-group">
-                <label for="correo">Correo electrónico</label>
-                <input type="email" class="form-control" id="correo"
-                    name="correo" required>
-                <div *ngIf="correoReasonsInvalid.length != 0">
-                    <span class="message-error">El formato del correo
-                        electrónico no es valido:
-                        {{showEmailInvalidMessage()}}</span>
+                <label for="fechaVencimiento">Fecha vencimiento:</label>
+                <input type="date" class="form-control"
+                    id="fechaVencimiento"
+                    name="fechaVencimiento"
+                    [required]="tieneCarnet">
+                <div *ngIf="fechaVencimientoReasonsInvalid.length != 0">
+                    <span class="message-error">La fecha de emisión
+                        proporcionada es invalida:
+                        {{showEndDateInvalidMessage()}}</span>
                 </div>
             </div>
             <div class="form-group">
-                <label for="telefono">Teléfono de contacto:</label>
-                <input type="tel" class="form-control" id="telefono"
-                    name="telefono" required>
-                <div *ngIf="telefonoReasonsInvalid.length != 0">
-                    <span class="message-error">El télefono de contacto tiene un
-                        formato invlaido:
-                        {{showPhoneInvalidMessage()}}</span>
+                <label for="carnet">Comprobante</label>
+                <input [required]="tieneCarnet" type="file" id="carnet"
+                    (change)="onFileSelected($event)" accept=".jpg, .pdf" />
+                <div *ngIf="!archivoValido && carnet != undefined">
+                    <span class="message-error"> Error al subir el archivo:
+                        {{showVoucherInvalidMessage()}}</span>
                 </div>
             </div>
+        </div>
+
+        <div class="form-group">
+            <label for="domicilio">Domicilio completo de residencia:</label>
+            <input type="text" class="form-control" id="domicilio"
+                name="domicilio" required>
+            <div *ngIf="domicilioReasonsInvalid.length != 0">
+                <span class="message-error">El formato del domicilio no es
+                    valido:
+                    {{showAddressInvalidMessage()}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" class="form-control" id="correo"
+                name="correo" required>
+            <div *ngIf="correoReasonsInvalid.length != 0">
+                <span class="message-error">El formato del correo
+                    electrónico no es valido:
+                    {{showEmailInvalidMessage()}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="telefono">Teléfono de contacto:</label>
+            <input type="tel" class="form-control" id="telefono"
+                name="telefono" required>
+            <div *ngIf="telefonoReasonsInvalid.length != 0">
+                <span class="message-error">El télefono de contacto tiene un
+                    formato invlaido:
+                    {{showPhoneInvalidMessage()}}</span>
+            </div>
+        </div>
 
         <input type="submit" value="Registrarse">
     </form>
     <br>
     <br>
-    <button class="join-button" routerLink="/">Volver</button>
+    <button class="join-button" [routerLink]="">Volver</button>
 </div>

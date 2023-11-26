@@ -29,7 +29,7 @@ export class FuncionarioUCU {
   }
   
   export class Funcionario extends FuncionarioUCU {
-    carneSalud: CarneSalud;
+    carneSalud: CarneSalud | null;
   
     constructor(
       _nombre: string,
@@ -39,7 +39,7 @@ export class FuncionarioUCU {
       _telefono: string,
       _email: string,
       _domicilio: string,
-      _carneSalud: CarneSalud
+      _carneSalud: CarneSalud | null
     ) {
       super(_nombre, _apellido, _ci, _fechaNacimiento, _telefono, _email, _domicilio);
       this.carneSalud = _carneSalud;

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { ActualizarFuncionarioComponent } from './components/actualizar-funcionario/actualizar-funcionario.component';
 import { AgendarFechaComponent } from './components/agendar-fecha/agendar-fecha.component';
