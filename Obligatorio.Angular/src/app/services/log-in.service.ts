@@ -11,9 +11,10 @@ export class LogInService {
 
   constructor(private http: HttpClient, private cookies: CookieService) {}
 
- // poner acaaa
+  url: string = "http://localhost:3000/"
+
   login(user: any): Observable<any> {
-    return this.http.post("........", user);
+    return this.http.post(this.url + "/login/login", user);
   }
 
   setToken(token: string) {
@@ -40,8 +41,9 @@ export class LogInService {
     this.cookies.delete("userID");
     this.cookies.delete("token");
   }
-  signUp(user: String, pass: String){
-    
+
+  signUp(datos: any):  Observable<any>{
+    return this.http.post(this.url + "usuario/addUsuario", datos);
   }
 }
 

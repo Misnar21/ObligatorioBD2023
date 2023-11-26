@@ -5,7 +5,6 @@ import { Route, Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
 
@@ -14,18 +13,31 @@ export class LoginComponent {
   user = "";
   password = "";
 
+  userExist = true
+
   login() {
     const userCredentials = { id: this.user, password: this.password };
     this.loginService.login(userCredentials).subscribe(
       (data) => {
         if (data && data.token) {
+        
           this.loginService.setToken(data.token);
           this.loginService.setUserData(this.user);
-          this.router.navigateByUrl('/formulario');
+
+          if(data.rol != undefined && data.rol == "admin"){
+            this.router.navigateByUrl('/agregarPeriodo');
+          }
+
+          if(data.rol != undefined && data.rol == "funcionario"){
+            this.router.navigateByUrl('/actualizarDatos');
+          }
         }
       },
       (error) => {
         if (error.status === 401) {
+          this.userExist = false
+          this.user = ""
+          this.password = ""
           alert("Error: contraseña o usario incorrecto");
         }
         console.error(error);

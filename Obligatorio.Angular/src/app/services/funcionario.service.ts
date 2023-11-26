@@ -14,4 +14,5 @@ export class FuncionarioService
   constructor(private http: HttpClient) {}
 
   getAllFuncionarios = () => this.http.get<Funcionario[]>(this.apiUrl);
+
 }

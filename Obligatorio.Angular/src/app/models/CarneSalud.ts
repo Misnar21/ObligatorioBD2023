@@ -2,13 +2,13 @@ export class CarneSalud {
     ci: string;
     fechaEmision: Date;
     fechavencimiento: Date;
-    comprobante: string;
+    comprobante: FormData;
   
     constructor(
       _ci: string,
       _fechaEmision: Date,
       _fechavencimiento: Date,
-      _comprobante: string
+      _comprobante: FormData
     ) {
       this.ci = _ci;
       this.fechaEmision = _fechaEmision;
