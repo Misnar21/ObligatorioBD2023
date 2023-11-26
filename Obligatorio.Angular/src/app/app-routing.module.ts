@@ -7,6 +7,7 @@ import { ActualizarFuncionarioComponent } from './components/actualizar-funciona
 import { AgregarPeriodoActualizacionComponent } from './components/agregar-periodo-actualizacion/agregar-periodo-actualizacion.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/logIn', pathMatch: 'full'},
   { path: 'formulario', component: FormularioComponent },
   { path: 'logIn', component: LoginComponent },
   { path: 'signUp', component: SignUpComponent },
