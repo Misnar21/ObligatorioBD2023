@@ -21,11 +21,11 @@ export class SignUpComponent {
   formularioInvalido: boolean = false
   messageFormError: string = ""
 
-  serAdmin: boolean = false
-  serFuncionario: boolean = false
 
   carnet: File | undefined
-  tieneCarnet = false
+  tieneCarnet: boolean = false
+
+  rol: string = ""
 
   userReasonsInvalid: string[] = [];
   passReasonsInvalid: string[] = [];
@@ -39,7 +39,13 @@ export class SignUpComponent {
   telefonoReasonsInvalid: string[] = [];
   archivoValido = false;
 
+  setTieneCarnet(valor: boolean) {
+    this.tieneCarnet = valor
+  }
 
+  setRol(rol: string) {
+    this.rol = rol
+  }
   showUserInvalidMessage() {
     let message = "  s"
     for (let reason of this.userReasonsInvalid) {
@@ -174,36 +180,43 @@ export class SignUpComponent {
     this.passReasonsInvalid = this.validador.validarPass(pass);
 
 
-    if (this.serFuncionario) {
-      ci = form.value.ci
-      nombreCompleto = form.value.nombreCompleto
-      fechaNacimiento = form.value.fch_nacimiento
-      fechaVencimientoCarnet = form.value.fechaVencimiento
-      fechaEmisionCarnet = form.value.fechaEmision
-      domicilio = form.value.domicilio
-      correo = form.value.correo
-      telefono = form.value.telefono
 
-      this.ciReasonsInvalid = this.validador.validarCI(ci)
-      this.nombreCompletoReasonsInvalid = this.validador.validarNombre(nombreCompleto)
-      this.fechaNacimientoReasonsInvalid = this.validador.validarFechaNacimiento(fechaNacimiento)
+    ci = form.value.ci
+    nombreCompleto = form.value.nombreCompleto
+    fechaNacimiento = form.value.fch_nacimiento
+    fechaVencimientoCarnet = form.value.fechaVencimiento
+    fechaEmisionCarnet = form.value.fechaEmision
+    domicilio = form.value.domicilio
+    correo = form.value.correo
+    telefono = form.value.telefono
 
-      this.fechaVencimientoReasonsInvalid = this.validador.validarFechaVencimiento(fechaVencimientoCarnet)
-      this.fechaEmisionReasonsInvalid = this.validador.validarFechaEmision(fechaEmisionCarnet)
-      this.domicilioReasonsInvalid = this.validador.validarDomicilio(domicilio)
-      this.correoReasonsInvalid = this.validador.validarCorreo(correo)
-      this.telefonoReasonsInvalid = this.validador.validarTelefono(telefono)
+    this.ciReasonsInvalid = this.validador.validarCI(ci)
+    this.nombreCompletoReasonsInvalid = this.validador.validarNombre(nombreCompleto)
+    this.fechaNacimientoReasonsInvalid = this.validador.validarFechaNacimiento(fechaNacimiento)
 
-      const formData = new FormData();
-      formData.append('archivo', this.carnet);
+    this.fechaVencimientoReasonsInvalid = this.validador.validarFechaVencimiento(fechaVencimientoCarnet)
+    this.fechaEmisionReasonsInvalid = this.validador.validarFechaEmision(fechaEmisionCarnet)
+    this.domicilioReasonsInvalid = this.validador.validarDomicilio(domicilio)
+    this.correoReasonsInvalid = this.validador.validarCorreo(correo)
+    this.telefonoReasonsInvalid = this.validador.validarTelefono(telefono)
 
-      let _rol = this.serAdmin && !this.serFuncionario ? "admin" : "funcionario"
-      if (this.serFuncionario || this.serAdmin && this.revisarDatos()) {
-        let carnetSalud = new CarneSalud(ci.toString(), fechaEmisionCarnet, fechaVencimientoCarnet, formData)
+
+
+
+    if (this.rol == "Funcionario" || this.rol == "Admin" && this.revisarDatos()) {
+      let carneSalud = null
+      if (this.tieneCarnet && this.carnet != undefined && this.archivoValido) {
+        const formData = new FormData();
+        formData.append('archivo', this.carnet);
+        carneSalud = new CarneSalud(ci.toString(), fechaEmisionCarnet, fechaVencimientoCarnet, formData)
+      } else if (this.tieneCarnet && (this.carnet == undefined || !this.archivoValido)) {
+        this.formularioInvalido = true
+        this.messageFormError = "Debe subir un formato valido de comprobante, jpg o pdf"
+      } else {
         var datos = {
-          funcionario: new Funcionario(nombreCompleto, nombreCompleto, ci.toString(), fechaNacimiento, telefono, correo, domicilio, carnetSalud),
+          funcionario: new Funcionario(nombreCompleto, nombreCompleto, ci.toString(), fechaNacimiento, telefono, correo, domicilio, carneSalud),
           usuario: new Usuario(user, pass),
-          rol: _rol
+          rol: this.rol
         }
 
         this.servicioRegistro.signUp(datos).subscribe(
@@ -214,12 +227,14 @@ export class SignUpComponent {
             alert("Error" + error)
           }
         )
-      } else {
-        this.formularioInvalido = true
-        this.messageFormError = "Debe especificar un rol para poder registrarse"
       }
-
+    } else {
+      this.formularioInvalido = true
+      this.messageFormError = "Debe especificar un rol para poder registrarse"
     }
+
+
+
 
 
 
@@ -227,8 +242,7 @@ export class SignUpComponent {
 
 
   revisarDatos() {
-    return this.archivoValido && this.carnet != undefined &&
-      this.userReasonsInvalid.length == 0 &&
+    return this.userReasonsInvalid.length == 0 &&
       this.passReasonsInvalid.length == 0 &&
       this.ciReasonsInvalid.length == 0 &&
       this.nombreCompletoReasonsInvalid.length == 0 &&
@@ -253,3 +267,7 @@ export class SignUpComponent {
     }
   }
 }
+function onOptionChange(algo: any, Event: { new(type: string, eventInitDict?: EventInit): Event; prototype: Event; readonly NONE: 0; readonly CAPTURING_PHASE: 1; readonly AT_TARGET: 2; readonly BUBBLING_PHASE: 3; }) {
+  throw new Error('Function not implemented.');
+}
+
