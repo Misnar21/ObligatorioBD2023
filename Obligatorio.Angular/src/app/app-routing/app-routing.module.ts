@@ -5,6 +5,7 @@ import { SignUpComponent } from '../components/sign-up/sign-up.component';
 import { FormularioComponent } from '../components/formulario/formulario.component';
 import { ActualizarFuncionarioComponent } from '../components/actualizar-funcionario/actualizar-funcionario.component';
 import { AgregarPeriodoActualizacionComponent } from '../components/agregar-periodo-actualizacion/agregar-periodo-actualizacion.component';
+import { AgendarFechaComponent } from '../components/agendar-fecha/agendar-fecha.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'logIn', pathMatch: 'full'}, 
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'logIn', component: LoginComponent },
   { path: 'signUp', component: SignUpComponent },
   { path: 'actualizarDatos', component: ActualizarFuncionarioComponent },
-  { path: 'agregarPeriodo', component: AgregarPeriodoActualizacionComponent }
+  { path: 'agregarPeriodo', component: AgregarPeriodoActualizacionComponent },
+  { path: 'probarAgenda', component: AgendarFechaComponent },
 ];
 
 @NgModule({

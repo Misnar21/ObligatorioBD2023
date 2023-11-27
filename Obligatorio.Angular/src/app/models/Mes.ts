@@ -1,7 +1,7 @@
 import { Dia } from "./Dia"
 
 export interface Mes{
-    añoPerteneciente: string
+    anioPerteneciente: number
     nombre: string
     numero: number
 

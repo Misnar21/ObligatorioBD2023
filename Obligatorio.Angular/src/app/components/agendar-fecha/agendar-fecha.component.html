@@ -1,1 +1,118 @@
-<p>agendar-fecha works!</p>
+<div class="calendario">
+    <h3>{{mesAMostrar.nombre +" del año " + mesAMostrar.anioPerteneciente}}</h3>
+    <button *ngIf="0 <= punteroMes" (click)="mesAnterior()"> < </button>
+    <button *ngIf="months.length - 1 > punteroMes" (click)="mesSiguiente()"> >
+    </button>
+    <div clas="col-semana">
+        Domingo
+        <div *ngFor="let dia of mesAMostrar.todosLosDomingos">
+            <div *ngIf="dia; else elseBlock">
+                <div *ngIf="dia.sePuede; else elseBlock">
+                    <button (click)="agendarMe(dia.numero)">{{dia.numero}}</button>
+                </div>
+                <ng-template #elseBlock>
+                    {{dia.numero}}
+                </ng-template>
+            </div>
+            <ng-template #elseBlock>
+                <p><!-- Intencionalmente vació --></p>
+            </ng-template>
+        </div>
+    </div>
+    <div clas="col-semana">
+        Lunes
+        <div *ngFor="let dia of mesAMostrar.todosLosLunes">
+            <div *ngIf="dia; else elseBlock">
+                <div *ngIf="dia.sePuede; else elseBlock">
+                    <button (click)="agendarMe(dia.numero)">{{dia.numero}}</button>
+                </div>
+                <ng-template #elseBlock>
+                    {{dia.numero}}
+                </ng-template>
+            </div>
+            <ng-template #elseBlock>
+                <p><!-- Intencionalmente vació --></p>
+            </ng-template>
+        </div>
+    </div>
+    <div clas="col-semana">
+        Martes
+        <div *ngFor="let dia of mesAMostrar.todosLosMartes">
+            <div *ngIf="dia; else elseBlock">
+                <div *ngIf="dia.sePuede; else elseBlock">
+                    <button (click)="agendarMe(dia.numero)">{{dia.numero}}</button>
+                </div>
+                <ng-template #elseBlock>
+                    {{dia.numero}}
+                </ng-template>
+            </div>
+            <ng-template #elseBlock>
+                <p><!-- Intencionalmente vació --></p>
+            </ng-template>
+        </div>
+    </div>
+    <div clas="col-semana">
+        Miércoles
+        <div *ngFor="let dia of mesAMostrar.todosLosMiercoles">
+            <div *ngIf="dia; else elseBlock">
+                <div *ngIf="dia.sePuede; else elseBlock">
+                    <button (click)="agendarMe(dia.numero)">{{dia.numero}}</button>
+                </div>
+                <ng-template #elseBlock>
+                    {{dia.numero}}
+                </ng-template>
+            </div>
+            <ng-template #elseBlock>
+                <p><!-- Intencionalmente vació --></p>
+            </ng-template>
+        </div>
+    </div>
+    <div clas="col-semana">
+        Jueves
+        <div *ngFor="let dia of mesAMostrar.todosLosJueves">
+            <div *ngIf="dia; else elseBlock">
+                <div *ngIf="dia.sePuede; else elseBlock">
+                    <button (click)="agendarMe(dia.numero)">{{dia.numero}}</button>
+                </div>
+                <ng-template #elseBlock>
+                    {{dia.numero}}
+                </ng-template>
+            </div>
+            <ng-template #elseBlock>
+                <p><!-- Intencionalmente vació --></p>
+            </ng-template>
+        </div>
+    </div>
+    <div clas="col-semana">
+        Viernes
+        <div *ngFor="let dia of mesAMostrar.todosLosiVernes">
+            <div *ngIf="dia; else elseBlock">
+                <div *ngIf="dia.sePuede; else elseBlock">
+                    <button (click)="agendarMe(dia.numero)">{{dia.numero}}</button>
+                </div>
+                <ng-template #elseBlock>
+                    {{dia.numero}}
+                </ng-template>
+            </div>
+            <ng-template #elseBlock>
+                <p><!-- Intencionalmente vació --></p>
+            </ng-template>
+        </div>
+    </div>
+    <div clas="col-semana">
+        Sábado
+        <div *ngFor="let dia of mesAMostrar.todosLosSabados">
+            <div *ngIf="dia; else elseBlock">
+                <div *ngIf="dia.sePuede; else elseBlock">
+                    <button (click)="agendarMe(dia.numero)">{{dia.numero}}</button>
+                </div>
+                <ng-template #elseBlock>
+                    {{dia.numero}}
+                </ng-template>
+            </div>
+            <ng-template #elseBlock>
+                <p><!-- Intencionalmente vació --></p>
+            </ng-template>
+        </div>
+    </div>
+</div>

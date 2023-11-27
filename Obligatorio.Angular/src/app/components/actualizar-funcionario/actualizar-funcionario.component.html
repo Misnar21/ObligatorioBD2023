@@ -9,7 +9,7 @@
             <div class="form-group">
                 <label for="ci">CI:</label>
                 <input type="text" class="form-control" id="ci"
-                    required name="ci">
+                    required name="ci" [(ngModel)]="ci">
                 <div *ngIf="ciReasonsInvalid.length != 0">
                     <span class="message-error">La cédula de identidad no cumple
                         con el
@@ -21,7 +21,7 @@
             <div class="form-group">
                 <label for="nombreCompleto">Nombre completo:</label>
                 <input type="text" class="form-control" id="nombreCompleto"
-                    name="nombreCompleto"
+                    name="nombreCompleto"  [(ngModel)]="nombreCompleto"
                     required>
                 <div *ngIf="nombreCompletoReasonsInvalid.length != 0">
                     <span class="message-error">El nombre no cumple con el
@@ -33,7 +33,7 @@
             <div class="form-group">
                 <label for="fch_nacimiento">Fecha nacimiento:</label>
                 <input type="date" class="form-control" id="fch_nacimiento"
-                    name="fch_nacimiento"
+                    name="fch_nacimiento"  [(ngModel)]="fch_nacimiento"
                     required>
                 <div *ngIf="fechaNacimientoReasonsInvalid.length != 0">
                     <span class="message-error">La fecha de nacimiento no es
@@ -54,7 +54,7 @@
                     <label for="fechaEmision">Fecha Emisión:</label>
                     <input type="date" class="form-control" id="fechaEmision"
                         name="fechaEmision"
-                        [required]="tieneCarnet">
+                        [required]="tieneCarnet" [(ngModel)]="fechaEmision"> 
                     <div *ngIf="fechaEmisionReasonsInvalid.length != 0">
                         <span class="message-error">La fecha de emisión
                             proporcionada es invalida:
@@ -66,7 +66,7 @@
                     <input type="date" class="form-control"
                         id="fechaVencimiento"
                         name="fechaVencimiento"
-                        [required]="tieneCarnet">
+                        [required]="tieneCarnet" [(ngModel)]="fechaVencimiento">
                     <div *ngIf="fechaVencimientoReasonsInvalid.length != 0">
                         <span class="message-error">La fecha de emisión
                             proporcionada es invalida:
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-           <app-agendar-fecha *ngIf="!tieneCarnet" ></app-agendar-fecha>
+           <app-agendar-fecha *ngIf="!tieneCarnet" (mensajeActualizado)="registrar($event)"></app-agendar-fecha>
 
         <input type="submit" value="Registrarse">
     </form>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FuncionarioService } from 'src/app/services/funcionario.service';
 import { LogInService } from 'src/app/services/log-in.service';
 import { ValidadorService } from 'src/app/validador.service';
 
@@ -10,8 +11,13 @@ import { ValidadorService } from 'src/app/validador.service';
 })
 export class ActualizarFuncionarioComponent {
 
-  constructor(private servicioRegistro: LogInService, private router: Router, private validador: ValidadorService) { }
+  constructor(private funcionarioService: FuncionarioService, private router: Router, private validador: ValidadorService) { }
 
+  ci: string = ""
+  nombreCompleto: string = ""
+  fch_nacimiento: string = ""
+  fechaVencimiento: string = ""
+  fechaEmision: string = ""
 
   formularioInvalido: boolean = false
   messageFormError: string = ""
@@ -19,6 +25,7 @@ export class ActualizarFuncionarioComponent {
   carnet: File | undefined
   tieneCarnet = false
 
+  fecha: Date
   ciReasonsInvalid: string[] = [];
   nombreCompletoReasonsInvalid: string[] = [];
   fechaNacimientoReasonsInvalid: string[] = [];
@@ -100,19 +107,13 @@ export class ActualizarFuncionarioComponent {
 
 
   onSubmit(form: NgForm) {
-    let ci: number = 0
-    let nombreCompleto: string = ""
-    let fechaNacimiento = new Date()
-    let fechaVencimientoCarnet = new Date()
-    let fechaEmisionCarnet = new Date()
+    let ci: string = this.ci
+    let nombreCompleto: string = this.nombreCompleto
+    let fechaNacimiento = new Date(this.fch_nacimiento)
+    let fechaVencimientoCarnet = new Date(this.fechaEmision)
+    let fechaEmisionCarnet = new Date(this.fechaVencimiento)
 
 
-
-    ci = form.value.ci
-    nombreCompleto = form.value.nombreCompleto
-    fechaNacimiento = form.value.fch_nacimiento
-    fechaVencimientoCarnet = form.value.fechaVencimiento
-    fechaEmisionCarnet = form.value.fechaEmision
 
     this.ciReasonsInvalid = this.validador.validarCI(ci)
     this.nombreCompletoReasonsInvalid = this.validador.validarNombre(nombreCompleto)
@@ -125,41 +126,49 @@ export class ActualizarFuncionarioComponent {
     formData.append('archivo', this.carnet);
     var datos = {}
 
-    if(this.tieneCarnet){
+    if (this.tieneCarnet) {
       datos = {
-        ci: form.value.ci,
-        nombreCompleto: form.value.nombreCompleto,
-        fechaNacimiento: form.value.fch_nacimiento,
-        fechaVencimientoCarnet: form.value.fechaVencimiento,
-        fechaEmisionCarnet: form.value.fechaEmision,
-        carnetComprobante: formData
+        data: {
+          ci: ci,
+          nombreCompleto: nombreCompleto,
+          fechaNacimiento: fechaNacimiento,
+          fechaVencimientoCarnet: fechaVencimientoCarnet,
+          fechaEmisionCarnet: fechaEmisionCarnet,
+          carnetComprobante: formData
+        }
       }
     } else {
       // Tiene que haberse agendado
-    }
-    
-
-
-
-
-    if (this.validarDatos()) {
-      this.servicioRegistro.signUp(datos).subscribe(
-        data => {
-          this.router.navigateByUrl("login")
-        },
-        error => {
-          alert("Error" + error)
+      if (this.fecha != undefined) {
+        datos = {
+          data: {
+            ci: ci,
+            nombreCompleto: nombreCompleto,
+            fechaNacimiento: fechaNacimiento,
+            fechaAgendada: this.fecha
+            
+          }
         }
-      )
-    } else {
-      this.formularioInvalido = true
-      this.messageFormError = "Revise que ha ingresado correctamente los datos"
+      }
+
+      if (this.validarDatos() && ( (this.archivoValido && this.carnet != undefined)|| this.fecha != undefined )) {
+        this.funcionarioService.actualizarDatos(datos).subscribe(
+          data => {
+            this.router.navigateByUrl("login")
+          },
+          error => {
+            alert("Error" + error)
+          }
+        )
+      } else {
+        this.formularioInvalido = true
+        this.messageFormError = "Revise que ha ingresado correctamente los datos"
+      }
     }
   }
 
   validarDatos() {
-    return this.archivoValido && this.carnet != undefined &&
-      this.ciReasonsInvalid.length == 0 &&
+    return  this.ciReasonsInvalid.length == 0 &&
       this.nombreCompletoReasonsInvalid.length == 0 &&
       this.fechaNacimientoReasonsInvalid.length == 0 &&
       this.fechaVencimientoReasonsInvalid.length == 0 &&
@@ -176,5 +185,9 @@ export class ActualizarFuncionarioComponent {
         this.carnet = archivo
       }
     }
+  }
+
+  registrar(fecha: string) {
+    this.fecha = new Date(fecha)
   }
 }

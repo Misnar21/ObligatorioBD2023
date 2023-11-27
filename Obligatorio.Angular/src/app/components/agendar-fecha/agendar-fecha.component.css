@@ -1,0 +1,9 @@
+.calendario {
+    display: flex;
+}
+
+.col-semana {
+    margin-left: 2px;
+    padding: 5px;
+    background-color: red;
+}

@@ -9,10 +9,13 @@ import { Funcionario } from '../models/Funcionario';
 })
 export class FuncionarioService
 {
-  private apiUrl = '';
+  private apiUrl = 'http://localhost:3000/';
 
   constructor(private http: HttpClient) {}
 
   getAllFuncionarios = () => this.http.get<Funcionario[]>(this.apiUrl);
 
+  actualizarDatos(datos: any): Observable<any>{
+    return this.http.post("http://localhost:3000/usuario/", datos);
+  }
 }

@@ -167,7 +167,7 @@ export class SignUpComponent {
   onSubmit(form: NgForm) {
     let user = form.value.usuario
     let pass = form.value.contraseña
-    let ci: number = 0
+    let ci: string = ""
     let nombreCompleto: string = ""
     let fechaNacimiento = new Date()
     let fechaVencimientoCarnet = new Date()
@@ -208,13 +208,13 @@ export class SignUpComponent {
       if (this.tieneCarnet && this.carnet != undefined && this.archivoValido) {
         const formData = new FormData();
         formData.append('archivo', this.carnet);
-        carneSalud = new CarneSalud(ci.toString(), fechaEmisionCarnet, fechaVencimientoCarnet, formData)
+        carneSalud = new CarneSalud(ci, fechaEmisionCarnet, fechaVencimientoCarnet, formData)
       } else if (this.tieneCarnet && (this.carnet == undefined || !this.archivoValido)) {
         this.formularioInvalido = true
         this.messageFormError = "Debe subir un formato valido de comprobante, jpg o pdf"
       } else {
         var datos = {
-          funcionario: new Funcionario(nombreCompleto, nombreCompleto, ci.toString(), fechaNacimiento, telefono, correo, domicilio, carneSalud),
+          funcionario: new Funcionario(nombreCompleto, nombreCompleto, ci, fechaNacimiento, telefono, correo, domicilio, carneSalud),
           usuario: new Usuario(user, pass),
           rol: this.rol
         }

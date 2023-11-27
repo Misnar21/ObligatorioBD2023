@@ -153,15 +153,14 @@ export class ValidadorService {
     return telefonoReasonsInvalid
   }
   
-  validarCI(ci: number){
+  validarCI(ci: string){
     let ciReasonsInvalid: Array<string> = []
-    let cedula =  ci.toString()
-    if (!this.regExp6.test(cedula)) {
+    if (!this.regExp6.test(ci)) {
       ciReasonsInvalid.push(" no tiene la cantidad de números")
     }
 
     // Obtener dígitos de la cédula
-    const digitos = cedula.split('').map(Number);
+    const digitos = ci.split('').map(Number);
 
     // Calcular el dígito verificador
     const digitoVerificador = digitos.pop();
