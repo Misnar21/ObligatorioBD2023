@@ -1,0 +1,1 @@
+{"version":3,"file":"Administrador.js","sourceRoot":"","sources":["../../models/Administrador.ts"],"names":[],"mappings":";;;AAAA,MAAa,aAAa;IAMtB,YAAY,EAAU,EAAE,UAAkB;QAHlC,UAAK,GAAW,EAAE,CAAC;QAIvB,IAAI,CAAC,UAAU,GAAG,UAAU,CAAC;QAC7B,IAAI,CAAC,EAAE,GAAG,EAAE,CAAC;IACjB,CAAC;IAEM,QAAQ,CAAC,KAAa;QACzB,IAAI,CAAC,KAAK,GAAG,KAAK,CAAA;IACtB,CAAC;CAIJ;AAjBD,sCAiBC"}

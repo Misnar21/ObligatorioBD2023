@@ -8,7 +8,7 @@
         <div class="form-group">
             <label for="usuario">Usuario:</label>
             <input type="text" class="form-control" id="usuario" name="usuario"
-                required name="usuario">
+                required name="usuario" [(ngModel)]="user">
             <div *ngIf="!userValid">
                 <span class="message-error">El formato del usuario no es valido:
                     {{showUserInvalidMessage()}}</span>
@@ -19,7 +19,7 @@
             <label for="contrasena">Contraseña:</label>
             <input type="password" class="form-control" id="contraseña"
                 name="contrasena"
-                required>
+                required  [(ngModel)]="pass">
             <div *ngIf="!passValid">
                 <span class="message-error">La contraseña no cumple con el
                     formato
@@ -42,8 +42,7 @@
 
         <div class="form-group">
             <label for="ci">CI:</label>
-            <input type="text" class="form-control" id="ci"
-                required name="ci">
+            <input type="text" class="form-control" id="ci" required name="ci" [(ngModel)]="ci">
             <div *ngIf="ciReasonsInvalid.length != 0">
                 <span class="message-error">La cédula de identidad no cumple
                     con el
@@ -56,7 +55,7 @@
             <label for="nombreCompleto">Nombre cmpleto:</label>
             <input type="text" class="form-control" id="nombreCompleto"
                 name="nombreCompleto"
-                required>
+                required [(ngModel)]="nombreCompleto">
             <div *ngIf="nombreCompletoReasonsInvalid.length != 0">
                 <span class="message-error">El nombre no cumple con el
                     formato
@@ -68,7 +67,7 @@
             <label for="fch_nacimiento">Fecha nacimiento:</label>
             <input type="date" class="form-control" id="fch_nacimiento"
                 name="fch_nacimiento"
-                required>
+                required [(ngModel)]="fechaNacimiento">
             <div *ngIf="fechaNacimientoReasonsInvalid.length != 0">
                 <span class="message-error">La fecha de nacimiento no es
                     valida para un funcionaro de la UCU:
@@ -83,13 +82,15 @@
             <p> <input type="radio" name="option_carnet"  (change)="setTieneCarnet(false)"
                   value="false" [ngModel]="tieneCarnet"> No</p>
         </div>
+
         <div class="form-group" *ngIf="tieneCarnet">
             <p>Datos del carnet</p>
             <div class="form-group">
                 <label for="fechaEmision">Fecha Emisión:</label>
                 <input type="date" class="form-control" id="fechaEmision"
                     name="fechaEmision"
-                    [required]="tieneCarnet">
+                    [required]="tieneCarnet"
+                    [(ngModel)]="fechaEmisionCarnet">
                 <div *ngIf="fechaEmisionReasonsInvalid.length != 0">
                     <span class="message-error">La fecha de emisión
                         proporcionada es invalida:
@@ -101,7 +102,8 @@
                 <input type="date" class="form-control"
                     id="fechaVencimiento"
                     name="fechaVencimiento"
-                    [required]="tieneCarnet">
+                    [required]="tieneCarnet"
+                    [(ngModel)]="fechaVencimientoCarnet">
                 <div *ngIf="fechaVencimientoReasonsInvalid.length != 0">
                     <span class="message-error">La fecha de emisión
                         proporcionada es invalida:
@@ -111,7 +113,8 @@
             <div class="form-group">
                 <label for="carnet">Comprobante</label>
                 <input [required]="tieneCarnet" type="file" id="carnet"
-                    (change)="onFileSelected($event)" accept=".jpg, .pdf" />
+                    (change)="onFileSelected($event)" accept=".jpg, .pdf"
+                    [(ngModel)]="carnet"/>
                 <div *ngIf="!archivoValido && carnet != undefined">
                     <span class="message-error"> Error al subir el archivo:
                         {{showVoucherInvalidMessage()}}</span>
@@ -122,7 +125,8 @@
         <div class="form-group">
             <label for="domicilio">Domicilio completo de residencia:</label>
             <input type="text" class="form-control" id="domicilio"
-                name="domicilio" required>
+                name="domicilio" required
+                [(ngModel)]="domicilio">
             <div *ngIf="domicilioReasonsInvalid.length != 0">
                 <span class="message-error">El formato del domicilio no es
                     valido:
@@ -132,7 +136,8 @@
         <div class="form-group">
             <label for="correo">Correo electrónico</label>
             <input type="email" class="form-control" id="correo"
-                name="correo" required>
+                name="correo" required
+                [(ngModel)]="correo">
             <div *ngIf="correoReasonsInvalid.length != 0">
                 <span class="message-error">El formato del correo
                     electrónico no es valido:
@@ -142,7 +147,8 @@
         <div class="form-group">
             <label for="telefono">Teléfono de contacto:</label>
             <input type="tel" class="form-control" id="telefono"
-                name="telefono" required>
+                name="telefono" required
+                [(ngModel)]="telefono">
             <div *ngIf="telefonoReasonsInvalid.length != 0">
                 <span class="message-error">El télefono de contacto tiene un
                     formato invlaido:
