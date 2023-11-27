@@ -49,7 +49,7 @@ INSERT INTO Logins (LogId, Pass) VALUES
 
 
 
-INSERT INTO Funcionarios (Ci, Nombre, Apellido, Fch_Nacimiento, Dirección, Teléfono, Email, LogId)
+INSERT INTO Funcionarios (Ci, Nombre, Apellido, Fch_Nacimiento, Direccion, Telefono, Email, LogId)
 VALUES
     (12345678, 'Juan', 'Pérez', '1990-05-15', 'Calle 123, Ciudad', '091234567', 'juan.perez@email.com', 'juanperez123'),
     (98765432, 'Ana', 'Gómez', '1985-08-20', 'Avenida 456, Ciudad', '091234568', 'ana.gomez@email.com', 'anagomez456'),
@@ -69,7 +69,7 @@ VALUES
     (65793251, 'Matias', 'Anselmo', '2001-11-17', 'Plaza 982, Ciudad', '092123678', 'matias.anselmo@correo.ucu.edu.uy', 'matias2001');
 
 
-INSERT INTO FuncionariosUCU(ci, nombre, apellido, fch_nacimiento, dirección, teléfono, email) VALUES
+INSERT INTO FuncionariosUCU(ci, nombre, apellido, fch_nacimiento, direccion, telefono, email) VALUES
     (12345678, 'Juan', 'Pérez', '1990-05-15', 'Calle 123, Ciudad', '091234567', 'juan.perez@email.com'),
     (98765432, 'Ana', 'Gómez', '1985-08-20', 'Avenida 456, Ciudad', '091234568', 'ana.gomez@email.com'),
     (11223344, 'Carlos', 'Rodríguez', '1982-02-10', 'Plaza 789, Ciudad', '091234569', 'carlos.rodriguez@email.com'),

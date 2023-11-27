@@ -22,9 +22,18 @@ export class SignUpComponent {
   messageFormError: string = ""
 
 
-  carnet: File | undefined
-  tieneCarnet: boolean = false
-
+  carnet: File | undefined;
+  tieneCarnet: boolean = false;
+  user: string = "";
+  pass: string = "";
+  ci: string = "";
+  nombreCompleto: string = "";
+  fechaNacimiento = new Date();
+  fechaVencimientoCarnet = new Date();
+  fechaEmisionCarnet = new Date();
+  domicilio: string = "";
+  correo: string = "";
+  telefono: string = "";
   rol: string = ""
 
   userReasonsInvalid: string[] = [];
@@ -176,29 +185,18 @@ export class SignUpComponent {
     let correo: string = ""
     let telefono: string = ""
 
-    this.userReasonsInvalid = this.validador.validarUser(user);
-    this.passReasonsInvalid = this.validador.validarPass(pass);
+    this.userReasonsInvalid = this.validador.validarUser(this.user);
+    this.passReasonsInvalid = this.validador.validarPass(this.pass);
 
+    this.ciReasonsInvalid = this.validador.validarCI(this.ci)
+    this.nombreCompletoReasonsInvalid = this.validador.validarNombre(this.nombreCompleto)
+    this.fechaNacimientoReasonsInvalid = this.validador.validarFechaNacimiento(this.fechaNacimiento)
 
-
-    ci = form.value.ci
-    nombreCompleto = form.value.nombreCompleto
-    fechaNacimiento = form.value.fch_nacimiento
-    fechaVencimientoCarnet = form.value.fechaVencimiento
-    fechaEmisionCarnet = form.value.fechaEmision
-    domicilio = form.value.domicilio
-    correo = form.value.correo
-    telefono = form.value.telefono
-
-    this.ciReasonsInvalid = this.validador.validarCI(ci)
-    this.nombreCompletoReasonsInvalid = this.validador.validarNombre(nombreCompleto)
-    this.fechaNacimientoReasonsInvalid = this.validador.validarFechaNacimiento(fechaNacimiento)
-
-    this.fechaVencimientoReasonsInvalid = this.validador.validarFechaVencimiento(fechaVencimientoCarnet)
-    this.fechaEmisionReasonsInvalid = this.validador.validarFechaEmision(fechaEmisionCarnet)
-    this.domicilioReasonsInvalid = this.validador.validarDomicilio(domicilio)
-    this.correoReasonsInvalid = this.validador.validarCorreo(correo)
-    this.telefonoReasonsInvalid = this.validador.validarTelefono(telefono)
+    this.fechaVencimientoReasonsInvalid = this.validador.validarFechaVencimiento(this.fechaVencimientoCarnet)
+    this.fechaEmisionReasonsInvalid = this.validador.validarFechaEmision(this.fechaEmisionCarnet)
+    this.domicilioReasonsInvalid = this.validador.validarDomicilio(this.domicilio)
+    this.correoReasonsInvalid = this.validador.validarCorreo(this.correo)
+    this.telefonoReasonsInvalid = this.validador.validarTelefono(this.telefono)
 
 
 
@@ -232,11 +230,6 @@ export class SignUpComponent {
       this.formularioInvalido = true
       this.messageFormError = "Debe especificar un rol para poder registrarse"
     }
-
-
-
-
-
 
   }
 

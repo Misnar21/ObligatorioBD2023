@@ -80,7 +80,8 @@ export class ValidadorService {
   }
 
   validarFechaNacimiento(fecha: Date) {
-    let añoNacimiento = fecha.getFullYear()
+    let fechaDate = new Date(fecha);
+    let añoNacimiento = fechaDate.getFullYear()
     let añoHoy = new Date().getFullYear()
     let fechaNacimientoReasonsInvalid: Array<string> = []
     let edad =  añoHoy - añoNacimiento
@@ -93,7 +94,8 @@ export class ValidadorService {
   }
 
   validarFechaVencimiento(fecha: Date) {
-    let añoVencimiento = fecha.getFullYear()
+    let fechaDate = new Date(fecha);
+    let añoVencimiento = fechaDate.getFullYear()
     let añoHoy = new Date().getFullYear()
     let fechaVencimientoReasonsInvalid: Array<string> = []
 

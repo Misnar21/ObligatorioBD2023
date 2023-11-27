@@ -107,5 +107,5 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   }, 
 
-  "include": ["./*.ts", "./routes/*.ts", "models/administrador.ts", "models/funcionario.ts"]
+  "include": ["./*.ts", "./routes/*.ts", "models/Administrador.ts", "models/Usuario.ts"]
 }
