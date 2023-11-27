@@ -14,7 +14,7 @@ export class LogInService {
   url: string = "http://localhost:3000/"
 
   login(user: any): Observable<any> {
-    return this.http.post(this.url + "/login/login", user);
+    return this.http.post(this.url + "login/", user);
   }
 
   setToken(token: string) {

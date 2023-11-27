@@ -6,7 +6,7 @@ import { PeriodoController } from "../controllers/PeriodoController";
 export class AgendaController
 {
     // El metodo get trae una agenda por su cedula y si pertenece al periodo actual.
-    Get(req, res)
+    Get(req: any, res: any)
     {
       const periodoController = new PeriodoController();
       const periodoActual : Periodo|null = periodoController.GetPeriodoActual();
@@ -30,12 +30,12 @@ export class AgendaController
       });
     }
   
-    Edit(req, res)
+    Edit(req:any, res:any)
     {
       // Implementa la lógica para editar un evento de agenda
     }
   
-    Delete(req, res)
+    Delete(req: any, res: any)
     {
       // Implementa la lógica para eliminar un evento de agenda
     }

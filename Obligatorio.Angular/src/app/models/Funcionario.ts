@@ -7,7 +7,7 @@ export class FuncionarioUCU {
     fechaNacimiento: Date;
     telefono: string;
     email: string;
-    domicilio: string;
+    direccion: string;
   
     constructor(
       _nombre: string,
@@ -16,7 +16,7 @@ export class FuncionarioUCU {
       _fechaNacimiento: Date,
       _telefono: string,
       _email: string,
-      _domicilio: string
+      _direccion: string
     ) {
       this.nombre = _nombre;
       this.apellido = _apellido;
@@ -24,7 +24,7 @@ export class FuncionarioUCU {
       this.fechaNacimiento = _fechaNacimiento;
       this.telefono = _telefono;
       this.email = _email;
-      this.domicilio = _domicilio;
+      this.direccion = _direccion;
     }
   }
   
@@ -38,10 +38,10 @@ export class FuncionarioUCU {
       _fechaNacimiento: Date,
       _telefono: string,
       _email: string,
-      _domicilio: string,
+      _direccion: string,
       _carneSalud: CarneSalud | null
     ) {
-      super(_nombre, _apellido, _ci, _fechaNacimiento, _telefono, _email, _domicilio);
+      super(_nombre, _apellido, _ci, _fechaNacimiento, _telefono, _email, _direccion);
       this.carneSalud = _carneSalud;
     }
   }

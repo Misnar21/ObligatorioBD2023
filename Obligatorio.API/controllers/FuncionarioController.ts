@@ -5,11 +5,11 @@ const db = require('../db');
 
 class FuncionarioController
 {
-    Get(req, res)
+    Get(req: any, res: any)
     {
       const funcionarioId = req.params.id;
 
-      db.query('SELECT * FROM funcionarios WHERE id = ?', [funcionarioId], (err, results) =>
+      db.query('SELECT * FROM funcionarios WHERE id = ?', [funcionarioId], (err: any, results: any) =>
       {
         if (err)
         {
@@ -22,7 +22,7 @@ class FuncionarioController
     }
 
   
-    Edit(req, res)
+    Edit(req: any, res: any)
     {
       // const funcionarioId = req.params.id;
       // const datosActualizados: Funcionario = req.body;
@@ -45,11 +45,11 @@ class FuncionarioController
       // });
     }
   
-    Agendar(req, res) // Se tiene que validar en el front haciendo un get de agenda, si hay no se puede mandar la solicitud
+    Agendar(req: any, res: any) // Se tiene que validar en el front haciendo un get de agenda, si hay no se puede mandar la solicitud
     {
       const agendaController  = new AgendaController();
       let agenda = req.body.data;
-      // agendaController.Get(req, res);
+      // agendaController.Get(req: any, res: any);
       db.query(
         'INSERT INTO Agenda (Nro, Ci, Fch_Agenda) VALUES (?, ?, ?)',
         [agenda.nro, agenda.ci, agenda.fechaAgenda],

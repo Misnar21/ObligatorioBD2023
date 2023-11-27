@@ -31,7 +31,7 @@ export class SignUpComponent {
   fechaNacimiento = new Date();
   fechaVencimientoCarnet = new Date();
   fechaEmisionCarnet = new Date();
-  domicilio: string = "";
+  direccion: string = "";
   correo: string = "";
   telefono: string = "";
   rol: string = ""
@@ -43,7 +43,7 @@ export class SignUpComponent {
   fechaNacimientoReasonsInvalid: string[] = [];
   fechaVencimientoReasonsInvalid: string[] = [];
   fechaEmisionReasonsInvalid: string[] = [];
-  domicilioReasonsInvalid: string[] = [];
+  direccionReasonsInvalid: string[] = [];
   correoReasonsInvalid: string[] = [];
   telefonoReasonsInvalid: string[] = [];
   archivoValido = false;
@@ -155,7 +155,7 @@ export class SignUpComponent {
 
   showAddressInvalidMessage() {
     let message = "  "
-    for (let reason of this.domicilioReasonsInvalid) {
+    for (let reason of this.direccionReasonsInvalid) {
       message += reason + ", "
     }
     message = message.slice(0, message.length - 2)
@@ -174,18 +174,8 @@ export class SignUpComponent {
   }
 
   onSubmit(form: NgForm) {
-    let user = form.value.usuario
-    let pass = form.value.contraseña
-    let ci: string = ""
-    let nombreCompleto: string = ""
-    let fechaNacimiento = new Date()
-    let fechaVencimientoCarnet = new Date()
-    let fechaEmisionCarnet = new Date()
-    let domicilio: string = ""
-    let correo: string = ""
-    let telefono: string = ""
 
-    this.userReasonsInvalid = this.validador.validarUser(this.user);
+   /*  this.userReasonsInvalid = this.validador.validarUser(this.user);
     this.passReasonsInvalid = this.validador.validarPass(this.pass);
 
     this.ciReasonsInvalid = this.validador.validarCI(this.ci)
@@ -194,32 +184,32 @@ export class SignUpComponent {
 
     this.fechaVencimientoReasonsInvalid = this.validador.validarFechaVencimiento(this.fechaVencimientoCarnet)
     this.fechaEmisionReasonsInvalid = this.validador.validarFechaEmision(this.fechaEmisionCarnet)
-    this.domicilioReasonsInvalid = this.validador.validarDomicilio(this.domicilio)
+    this.direccionReasonsInvalid = this.validador.validarDomicilio(this.direccion)
     this.correoReasonsInvalid = this.validador.validarCorreo(this.correo)
     this.telefonoReasonsInvalid = this.validador.validarTelefono(this.telefono)
+ */
 
 
 
-
-    if (this.rol == "Funcionario" || this.rol == "Admin" && this.revisarDatos()) {
+    if (this.rol == "Funcionario" || this.rol == "Administrador" && this.revisarDatos()) {
       let carneSalud = null
       if (this.tieneCarnet && this.carnet != undefined && this.archivoValido) {
         const formData = new FormData();
         formData.append('archivo', this.carnet);
-        carneSalud = new CarneSalud(ci, fechaEmisionCarnet, fechaVencimientoCarnet, formData)
+        carneSalud = new CarneSalud(this.ci.toString(), this.fechaEmisionCarnet, this.fechaVencimientoCarnet, formData)
       } else if (this.tieneCarnet && (this.carnet == undefined || !this.archivoValido)) {
         this.formularioInvalido = true
         this.messageFormError = "Debe subir un formato valido de comprobante, jpg o pdf"
       } else {
         var datos = {
-          funcionario: new Funcionario(nombreCompleto, nombreCompleto, ci, fechaNacimiento, telefono, correo, domicilio, carneSalud),
-          usuario: new Usuario(user, pass),
+          funcionario: new Funcionario(this.nombreCompleto.split(" ")[0] ?? this.nombreCompleto, this.nombreCompleto.split(" ")[1] ?? this.nombreCompleto, this.ci, this.fechaNacimiento, this.telefono, this.correo, this.direccion, carneSalud),
+          usuario: new Usuario(this.user, this.pass),
           rol: this.rol
         }
 
         this.servicioRegistro.signUp(datos).subscribe(
           data => {
-            this.router.navigateByUrl("login")
+            this.router.navigateByUrl("/logIn")
           },
           error => {
             alert("Error" + error)
@@ -235,16 +225,16 @@ export class SignUpComponent {
 
 
   revisarDatos() {
-    return this.userReasonsInvalid.length == 0 &&
+    return  true /* this.userReasonsInvalid.length == 0 &&
       this.passReasonsInvalid.length == 0 &&
       this.ciReasonsInvalid.length == 0 &&
       this.nombreCompletoReasonsInvalid.length == 0 &&
       this.fechaNacimientoReasonsInvalid.length == 0 &&
       this.fechaVencimientoReasonsInvalid.length == 0 &&
       this.fechaEmisionReasonsInvalid.length == 0 &&
-      this.domicilioReasonsInvalid.length == 0 &&
+      this.direccionReasonsInvalid.length == 0 &&
       this.correoReasonsInvalid.length == 0 &&
-      this.telefonoReasonsInvalid.length == 0
+      this.telefonoReasonsInvalid.length == 0 */
   }
 
 
@@ -263,4 +253,3 @@ export class SignUpComponent {
 function onOptionChange(algo: any, Event: { new(type: string, eventInitDict?: EventInit): Event; prototype: Event; readonly NONE: 0; readonly CAPTURING_PHASE: 1; readonly AT_TARGET: 2; readonly BUBBLING_PHASE: 3; }) {
   throw new Error('Function not implemented.');
 }
-

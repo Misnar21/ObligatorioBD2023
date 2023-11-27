@@ -2,7 +2,7 @@ import db from "../db";
 import { Periodo } from "../models/Periodos";
 export class PeriodoController
 {
-    Get(req, res)
+    Get(req: any, res: any)
     {
       // Implementa la lógica para obtener información de un periodo de actualización por ID
     }
@@ -30,7 +30,7 @@ export class PeriodoController
     }
 
 
-    GetAll(req, res)
+    GetAll(req: any, res: any)
     {
       db.query('SELECT * FROM periodos_actualizacion', (err, results) =>
       {
@@ -45,12 +45,12 @@ export class PeriodoController
       });
     }
   
-    Add(req, res)
+    Add(req: any, res: any)
     {
       // Implementa la lógica para agregar un nuevo periodo de actualización
     }
   
-    Edit(req, res)
+    Edit(req: any, res: any)
     {
       // Implementa la lógica para editar un periodo de actualización
     }

@@ -1,7 +1,7 @@
 import express from 'express'
 import * as middleware from '../middleware'
 import * as metodos from '../metodos'
-import { Administrador } from '../models/Administrador'
+import { Administrador } from '../models/administrador'
 import { Usuario } from '../models/Usuario'
 const router = express.Router()
 
@@ -9,12 +9,12 @@ export var admins: { [clave: string]: Administrador } = {};
 export var usuarios: { [clave: string]: Usuario } = {};
 
 // loguear usuario
-router.post('/login', async (req, res) => {
-  let userID = ""
-  let pass = ""
+router.post('/', async (req, res) => {
+  let id = ""
+  let password = ""
   try {
-    userID = req.body.usuario.id
-    pass = req.body.usuario.contraseña
+    id = req.body.id
+    password = req.body.password
   } catch (error) {
 
     // Error al pasar los datos
@@ -22,11 +22,11 @@ router.post('/login', async (req, res) => {
     res.send(JSON.stringify({ mensaje: "Error. Formato JSON invalido." }))
   }
 
-  if (userID != "" && pass != "") {
+  if (id != "" && password != "") {
     try {
 
       var token;
-      var userValidation: any = await metodos.login(userID, pass)
+      var userValidation: any = await metodos.login(id, password)
       console.log(userValidation)
 
       if (!userValidation.userValid) {
@@ -39,20 +39,20 @@ router.post('/login', async (req, res) => {
       } else {
 
         // Buscamos el rol ahora
-        let rol = await metodos.buscarRol(userID);
+        let rol = await metodos.buscarRol(id);
         console.log(rol)
 
         if (rol == "Administrador") {
-          admins[userID] = new Administrador(userID, pass)
+          admins[id] = new Administrador(id, password)
         } else if (rol == "Usuario") {
-          usuarios[userID] = new Usuario(userID, pass)
+          usuarios[id] = new Usuario(id, password)
         }
 
         //usuario valido, funcionario o administrador, le mando un token
-        if (rol == "Admin" || rol == "Usuario") {
-          token = middleware.sign(userID);
+        if (rol == "Administrador" || rol == "Usuario") {
+          token = middleware.sign(id);
           res.status(200)
-          res.send(JSON.stringify({ "token": token }));
+          res.send(JSON.stringify({ "token": token, "rol": rol}));
         } else {
           res.status(401)
           res.send(JSON.stringify({ "error, rol invalido": rol}));

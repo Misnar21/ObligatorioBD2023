@@ -1,5 +1,7 @@
 USE obligatorioBD;
 
+select * from Logins;
+
 INSERT INTO Roles (Nombre) VALUES ('Administrador'), ('Usuario');
 
 INSERT INTO Logins (LogId, Pass) VALUES
@@ -141,3 +143,6 @@ INSERT INTO TenerRol (ci, idrol) VALUES
     (56789023, 2),
     (54312493, 2),
     (65793251, 1);
+
+
+select  * from Logins;

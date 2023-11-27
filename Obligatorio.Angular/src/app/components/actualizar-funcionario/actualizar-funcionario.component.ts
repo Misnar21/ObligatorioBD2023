@@ -23,7 +23,8 @@ export class ActualizarFuncionarioComponent {
   messageFormError: string = ""
 
   carnet: File | undefined
-  tieneCarnet = false
+  tieneCarnet = true 
+  noEligioTodavia = true
 
   fecha: Date
   ciReasonsInvalid: string[] = [];
@@ -130,7 +131,8 @@ export class ActualizarFuncionarioComponent {
       datos = {
         data: {
           ci: ci,
-          nombreCompleto: nombreCompleto,
+          nombre: this.nombreCompleto.split(" ")[0] ?? this.nombreCompleto,
+          apellido: this.nombreCompleto.split(" ")[1] ?? this.nombreCompleto,
           fechaNacimiento: fechaNacimiento,
           fechaVencimientoCarnet: fechaVencimientoCarnet,
           fechaEmisionCarnet: fechaEmisionCarnet,
@@ -143,7 +145,8 @@ export class ActualizarFuncionarioComponent {
         datos = {
           data: {
             ci: ci,
-            nombreCompleto: nombreCompleto,
+            nombre: this.nombreCompleto.split(" ")[0] ?? this.nombreCompleto,
+            apellido: this.nombreCompleto.split(" ")[1] ?? this.nombreCompleto,
             fechaNacimiento: fechaNacimiento,
             fechaAgendada: this.fecha
             
@@ -154,7 +157,7 @@ export class ActualizarFuncionarioComponent {
       if (this.validarDatos() && ( (this.archivoValido && this.carnet != undefined)|| this.fecha != undefined )) {
         this.funcionarioService.actualizarDatos(datos).subscribe(
           data => {
-            this.router.navigateByUrl("login")
+            this.router.navigateByUrl("/logIn")
           },
           error => {
             alert("Error" + error)
@@ -168,11 +171,11 @@ export class ActualizarFuncionarioComponent {
   }
 
   validarDatos() {
-    return  this.ciReasonsInvalid.length == 0 &&
+    return true /* this.ciReasonsInvalid.length == 0 &&
       this.nombreCompletoReasonsInvalid.length == 0 &&
       this.fechaNacimientoReasonsInvalid.length == 0 &&
       this.fechaVencimientoReasonsInvalid.length == 0 &&
-      this.fechaEmisionReasonsInvalid.length == 0
+      this.fechaEmisionReasonsInvalid.length == 0 */
   }
 
   onFileSelected(event: any) {
@@ -189,5 +192,10 @@ export class ActualizarFuncionarioComponent {
 
   registrar(fecha: string) {
     this.fecha = new Date(fecha)
+  }
+
+  seleccionCarnet(valor: boolean){
+    this.tieneCarnet = valor
+    this.noEligioTodavia = false
   }
 }

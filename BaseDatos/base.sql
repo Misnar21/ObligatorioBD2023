@@ -47,11 +47,10 @@ CREATE TABLE Agenda (
 );
 
 CREATE TABLE Carnet_Salud (
-    Ci INT, 
+    Ci INT Primary Key,
     Fch_Emision DATE,
     Fch_Vencimiento DATE NOT NULL,
     Comprobante VARCHAR(500) NOT NULL,
-    Primary KEY (Ci, Fch_Emision),
     FOREIGN Key (Ci) REFERENCES Funcionarios(Ci)
 
 );

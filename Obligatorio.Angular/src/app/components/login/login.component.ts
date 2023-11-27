@@ -24,11 +24,11 @@ export class LoginComponent {
           this.loginService.setToken(data.token);
           this.loginService.setUserData(this.user);
 
-          if(data.rol != undefined && data.rol == "admin"){
+          if(data.rol != undefined && data.rol == "Administrador"){
             this.router.navigateByUrl('/agregarPeriodo');
           }
 
-          if(data.rol != undefined && data.rol == "funcionario"){
+          if(data.rol != undefined && data.rol == "Usuario"){
             this.router.navigateByUrl('/actualizarDatos');
           }
         }
@@ -40,7 +40,7 @@ export class LoginComponent {
           this.password = ""
           alert("Error: contraseña o usario incorrecto");
         }
-        console.error(error);
+        console.log(error);
       }
     );
   }
