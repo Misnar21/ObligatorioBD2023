@@ -1,15 +1,12 @@
 import express from 'express'
 import * as middleware from '../middleware'
 import * as metodos from '../metodos'
-import { Administrador } from '../models/administrador'
-import { Funcionario } from '../models/funcionario'
+import { Administrador } from '../models/Administrador'
+import { Usuario } from '../models/Usuario'
 const router = express.Router()
 
 export var admins: { [clave: string]: Administrador } = {};
-export var funcionarios: { [clave: string]: Funcionario } = {};
-
-
-
+export var usuarios: { [clave: string]: Usuario } = {};
 
 // loguear usuario
 router.post('/login', async (req, res) => {
@@ -48,7 +45,7 @@ router.post('/login', async (req, res) => {
         if (rol == "Administrador") {
           admins[userID] = new Administrador(userID, pass)
         } else if (rol == "Usuario") {
-          funcionarios[userID] = new Funcionario(userID, pass)
+          usuarios[userID] = new Usuario(userID, pass)
         }
 
         //usuario valido, funcionario o administrador, le mando un token

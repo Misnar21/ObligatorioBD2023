@@ -100,19 +100,11 @@ export class ActualizarFuncionarioComponent {
 
 
   onSubmit(form: NgForm) {
-    let ci: number = 0
-    let nombreCompleto: string = ""
-    let fechaNacimiento = new Date()
-    let fechaVencimientoCarnet = new Date()
-    let fechaEmisionCarnet = new Date()
-
-
-
-    ci = form.value.ci
-    nombreCompleto = form.value.nombreCompleto
-    fechaNacimiento = form.value.fch_nacimiento
-    fechaVencimientoCarnet = form.value.fechaVencimiento
-    fechaEmisionCarnet = form.value.fechaEmision
+    let ci: string = form.value.ci;
+    let nombreCompleto: string = form.value.nombreCompleto;
+    let fechaNacimiento = form.value.fch_nacimiento;
+    let fechaVencimientoCarnet = form.value.fechaVencimiento;
+    let fechaEmisionCarnet = form.value.fechaEmision;
 
     this.ciReasonsInvalid = this.validador.validarCI(ci)
     this.nombreCompletoReasonsInvalid = this.validador.validarNombre(nombreCompleto)

@@ -1,8 +1,12 @@
 'use strict';
-import userRouter from './routes/user'
+import loginRouter from './routes/loginRouter'
+import usuarioRouter from './routes/usuarioRouter'
+import agendaRouter from './routes/agendaRouter'
+import periodoRouter from './routes/periodoRouter'
+import funcionarioRouter from './routes/funcionarioRouter'
 import express from 'express';
 import { createServer } from "http";
-import db, { conectar } from './models/db'
+import db, { conectar } from './db'
 import { encrypt } from './encripter';
 
 
@@ -42,7 +46,11 @@ app.get('/test', (req: any, res: any) => {
 })
 
 
-app.use('/user', userRouter)
+app.use('/login', loginRouter)
+app.use('/usuario', usuarioRouter)
+app.use('/agenda', agendaRouter)
+app.use('/periodo', periodoRouter)
+app.use('/funcionario', funcionarioRouter)
 
 const httpServer = createServer(app);
 

@@ -21,8 +21,8 @@ CREATE TABLE Funcionarios(
     Nombre VARCHAR(100) NOT NULL, 
     Apellido VARCHAR(100) NOT NULL, 
     Fch_Nacimiento DATE NOT NULL,
-    Dirección VARCHAR(100) NOT NULL, 
-    Teléfono VARCHAR(9) NOT NULL, 
+    Direccion VARCHAR(100) NOT NULL, 
+    Telefono VARCHAR(9) NOT NULL, 
     Email VARCHAR(100) NOT NULL, 
     LogId VARCHAR(50) NOT NULL,
     FOREIGN KEY (LogId) REFERENCES Logins(LogId)
@@ -33,8 +33,8 @@ CREATE TABLE FuncionariosUCU(
     Nombre VARCHAR(100) NOT NULL, 
     Apellido VARCHAR(100) NOT NULL, 
     Fch_Nacimiento DATE,
-    Dirección VARCHAR(100) NOT NULL, 
-    Teléfono VARCHAR(9) NOT NULL, 
+    Direccion VARCHAR(100) NOT NULL, 
+    Telefono VARCHAR(9) NOT NULL, 
     Email VARCHAR(100) NOT NULL
 );
 

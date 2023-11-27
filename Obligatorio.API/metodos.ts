@@ -1,4 +1,4 @@
-import db from "./models/db";
+import db from "./db";
 import { encrypt } from "./encripter";
 import * as util from 'util';
 
