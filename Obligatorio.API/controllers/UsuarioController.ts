@@ -32,33 +32,40 @@ class UsuarioController {
   }
 
   Add(req: any, res: any) {
-    const { usuario, funcionario, rol } = req.body; // Suponiendo que los datos están en el cuerpo de la solicitud
+    const { usuario, funcionario, rol } = req.body; 
 
     var idRol = 0;
-    if (rol == "Funcionario") {
+    if (rol == "Funcionario")
+    {
       idRol = 2
     }
-    if (rol == "Administrador") {
+    if (rol == "Administrador")
+    {
       idRol = 1
     }
     let passEncrypt = encrypt(usuario.password)
     db.query(
       'INSERT INTO Logins (LogId, Pass) VALUES (?, ?)',
       [usuario.userID, passEncrypt],
-      (errUsuario: any, resultsUsuario: any) => {
-        if (errUsuario) {
+      (errUsuario: any, resultsUsuario: any) =>
+      {
+        if (errUsuario)
+        {
           console.error('Error al agregar el usuario:', errUsuario);
           return res.status(500).json({ error: 'Error al agregar el usuario.' });
         }
 
-        if (resultsUsuario.affectedRows === 1 && funcionario !== null) {
+        if (resultsUsuario.affectedRows === 1 && funcionario !== null)
+        {
           funcionario.userId = usuario.userID;
 
           db.query(
             'INSERT INTO Funcionarios (Ci, Nombre, Apellido, Fch_Nacimiento, Direccion, Telefono, Email, LogId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
             [parseInt(funcionario.ci), funcionario.nombre, funcionario.apellido, funcionario.fechaNacimiento, funcionario.direccion, funcionario.telefono, funcionario.email, usuario.userID],
-            (errFuncionario: any, resultsFuncionario: any) => {
-              if (errFuncionario) {
+            (errFuncionario: any, resultsFuncionario: any) =>
+            {
+              if (errFuncionario)
+              {
                 console.error('Error al agregar el funcionario:', errFuncionario);
 
                 // Si hay un error al agregar el funcionario, también debes eliminar el usuario agregado previamente
@@ -68,22 +75,29 @@ class UsuarioController {
                   }
                   return res.status(500).json({ error: 'Error al agregar el funcionario.' });
                 });
-              } else {
+              } 
+              else
+              {
                 db.query(
                   'INSERT INTO TenerRol  VALUES (?, ?)',
                   [parseInt(funcionario.ci), idRol],
-                  (errFuncionario: any, resultsFuncionario: any) => {
-                    if (errFuncionario) {
+                  (errFuncionario: any, resultsFuncionario: any) =>
+                  {
+                    if (errFuncionario)
+                    {
                       console.error('Error al agregar el funcionario:', errFuncionario);
 
                       // Si hay un error al agregar el funcionario, también debes eliminar el usuario agregado previamente
                       db.query('DELETE FROM Logins WHERE LogId = ?', [usuario.userID], (errDeleteUsuario: any) => {
-                        if (errDeleteUsuario) {
+                        if (errDeleteUsuario) 
+                        {
                           console.error('Error al eliminar el usuario:', errDeleteUsuario);
                         }
                         return res.status(500).json({ error: 'Error al agregar el funcionario.' });
                       });
-                    } else {
+                    } 
+                    else
+                    {
                       res.status(201).json(
                         {
                           mensaje: 'Usuario y funcionario agregados exitosamente.',

@@ -2,7 +2,7 @@ import db from "../db";
 import { Periodo } from "../models/Periodos";
 export class PeriodoController
 {
-    Get(req: any, res: any)
+    Get(año: number, semestre: number, fechaInicio: Date)
     {
       // Implementa la lógica para obtener información de un periodo de actualización por ID
     }
@@ -47,12 +47,51 @@ export class PeriodoController
   
     Add(req: any, res: any)
     {
-      // Implementa la lógica para agregar un nuevo periodo de actualización
+      const { año, semestre, fechaInicio, fechaFin } = req.body.Data;
+  
+      db.query(
+        'INSERT INTO Periodos_Actualizacion (Año, Semestre, Fch_Inicio, Fch_Fin) VALUES (?, ?, ?, ?)',
+        [año, semestre, fechaInicio, fechaFin],
+        (err: any, results: any) =>
+        {
+          if (err)
+          {
+            console.error('Error al agregar un nuevo periodo de actualización:', err);
+            return res.status(500).json({ error: 'Error al agregar un nuevo periodo de actualización.' });
+          }
+  
+          res.status(201).json(
+          {
+            mensaje: 'Nuevo periodo de actualización agregado exitosamente.',
+            periodoId: results.insertId,
+          });
+        }
+      );
     }
   
     Edit(req: any, res: any)
     {
-      // Implementa la lógica para editar un periodo de actualización
+      const { año, semestre, fechaInicio, fechaFin } = req.body.Data;
+      const { añoAntiguo, semestreAntiguo, fechaInicioAntiguo } = req.params;
+  
+      db.query(
+        'UPDATE Periodos_Actualizacion SET Año = ?, Semestre = ?, Fch_Inicio = ?, Fch_Fin = ? ' +
+        'WHERE Año = ? AND Semestre = ? AND Fch_Inicio = ?',
+        [año, semestre, fechaInicio, fechaFin, añoAntiguo, semestreAntiguo, fechaInicioAntiguo],
+        (err: any, results: any) => {
+          if (err)
+          {
+            console.error('Error al editar el periodo de actualización:', err);
+            return res.status(500).json({ error: 'Error al editar el periodo de actualización.' });
+          }
+  
+          res.status(200).json(
+          {
+            mensaje: 'Periodo de actualización editado exitosamente.',
+            afectados: results.affectedRows,
+          });
+        }
+      );
     }
   
   }
