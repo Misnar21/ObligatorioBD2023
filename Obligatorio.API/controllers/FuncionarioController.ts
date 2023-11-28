@@ -21,6 +21,21 @@ class FuncionarioController
       });
     }
 
+    GetFuncionariosANotificar(req: any, res: any) { 
+      db.query(
+        'SELECT * FROM FuncionariosUCU fu WHERE NOT EXISTS ' +
+        '(SELECT 1 FROM Funcionarios f WHERE f.ci = fu.ci)',
+        (err: any, results: any) => {
+          if (err) {
+            console.error('Error al obtener los funcionarios a notificar:', err);
+            return res.status(500).json({ error: 'Error al obtener los funcionarios a notificar.' });
+          }
+    
+          res.json(results);
+        }
+      );
+    }
+    
   
     Edit(req: any, res: any)
     {
@@ -49,7 +64,7 @@ class FuncionarioController
     {
       const agendaController  = new AgendaController();
       let agenda = req.body.data;
-      // agendaController.Get(req: any, res: any);
+      //agendaController.VerificarAgenda(); TODO
       db.query(
         'INSERT INTO Agenda (Nro, Ci, Fch_Agenda) VALUES (?, ?, ?)',
         [agenda.nro, agenda.ci, agenda.fechaAgenda],
