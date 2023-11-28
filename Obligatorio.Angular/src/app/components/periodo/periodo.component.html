@@ -1,0 +1,20 @@
+<!-- cambiar-fecha-periodo.component.html -->
+<div class="formulario">
+    <h2>Cambiar Fecha del Periodo</h2>
+    <form>
+      <div class="campo">
+        <label for="fechaInicio">Fecha de Inicio:</label>
+        <input type="date" id="fechaInicio" name="fechaInicio" [(ngModel)]="fechaInicio" required />
+      </div>
+  
+      <div class="campo">
+        <label for="fechaFin">Fecha de Fin:</label>
+        <input type="date" id="fechaFin" name="fechaFin" [(ngModel)]="fechaFin" required />
+      </div>
+  
+      <button type="button" (click)="guardar()">Guardar</button>
+      <br>
+      <button type="button" routerLink="/">Volver</button>
+    </form>
+  </div>
+  

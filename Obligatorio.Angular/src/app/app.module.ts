@@ -14,6 +14,9 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { ListaNotificarComponent } from './components/lista-notificar/lista-notificar.component';
+import { ListaNotificarService } from './services/lista-notificar.service';
+import { PeriodoActualizacionService } from './services/periodo-actualizacion.service';
 
 
 @NgModule({
@@ -26,7 +29,8 @@ import { CommonModule } from '@angular/common';
     LoginComponent,
     AgregarPeriodoActualizacionComponent,
     FormularioComponent,
-    SignUpComponent
+    SignUpComponent, 
+    ListaNotificarComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,7 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     CommonModule
   ],
-  providers: [],
+  providers: [ListaNotificarService, PeriodoActualizacionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
