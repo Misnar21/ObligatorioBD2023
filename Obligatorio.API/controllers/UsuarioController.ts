@@ -1,19 +1,7 @@
 
 import db from "../db";
 import { encrypt } from "../encripter";
-const multer = require('multer');
 
-// Configuración de Multer para almacenar archivos
-const storage = multer.diskStorage({
-  destination: function (req: any, file: any, cb: any) {
-    cb(null, '../uploads/');
-  },
-  filename: function (req: any, file: any, cb: any) {
-    cb(null, file.originalname);
-  }
-});
-
-const upload = multer({ storage: storage });
 
 
 
@@ -118,39 +106,9 @@ class UsuarioController {
       }
     );
   }
+}
 
-
-  Edit(req: any, res: any) {
-    const { data } = req.body.data; // Suponiendo que los datos están en el cuerpo de la solicitud
-
-
-    let tieneCarnet = data.carnetComprobante != undefined
-
-    if (tieneCarnet) {
-      upload.single("archivo")
-
-      db.query(`UPDATE Funcionarios SET Nombre=?, Apellido=?, Fch_Nacimiento=? WHERE Ci=?`, [data.nombre, data.apellido, data.fechaNacimiento, data.ci],
-        (errUsuario: any, resultsUsuario: any) => {
-          if (errUsuario) {
-            console.error('Error al modificar funcionario:', errUsuario);
-            return res.status(500).json({ error: 'Error al modificar datos del funcionario.' });
-          } else {
-
-            // Debo procesar el archivo
-            let rutaComprobante = "../uploads/" + data.carnetComprobante.filename
-
-            db.query(`UPDATE Carnet_Salud SET Fch_Emision=?, Fch_Vencimiento=?, Comprobante=? WHERE Ci=?`, [data.fechaEmisionCarnet, data.fechaVencimientoCarnet,  rutaComprobante, data.ci],
-              (errUsuario: any, resultsUsuario: any) => {
-                if (errUsuario) {
-                  console.error('Error al modificar el carnet:', errUsuario);
-                  return res.status(500).json({ error: 'Error al modificar el carnet.' });
-                } else {
-                  return res.status(200).json({ mensaje: 'Modificado satisfactoriamente' });
-                }
-              })
-          }
-        })
-    }
+  
     /* 
      datos = {
       data: {
@@ -176,7 +134,6 @@ class UsuarioController {
       }
     */
     // Implementa la lógica para editar un usuario
-  }
-}
+
 
 module.exports = UsuarioController;

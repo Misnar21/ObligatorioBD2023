@@ -1,6 +1,6 @@
 <div class="container">
-    <h2>Registrarse</h2>
-    <form (ngSubmit)="onSubmit(updateForm)" #updateForm="ngForm">
+    <h2>Actualizar Datos</h2>
+    <form>
 
         <div *ngIf="formularioInvalido">
             <p>{{messageFormError}}</p>
@@ -35,7 +35,7 @@
             <label for="fch_nacimiento">Fecha nacimiento:</label>
             <input type="date" class="form-control" id="fch_nacimiento"
                 name="fch_nacimiento" [(ngModel)]="fch_nacimiento"
-                required min="2023-01-01" max="2023-12-31">
+                required>
             <div *ngIf="fechaNacimientoReasonsInvalid.length != 0">
                 <span class="message-error">La fecha de nacimiento no es
                     valida para un funcionaro de la UCU:
@@ -87,11 +87,12 @@
 
         <div *ngIf="!tieneCarnet && !noEligioTodavia">
             
-            <input type="text">
+            <input type="date" [(ngModel)]="fechaAgenda" >
+            <button (click)="agendarse()" >Agendarse</button>
 
         </div>
 
-        <input type="submit" value="Registrarse">
+        <input type="submit" (click)="onSubmit()" value="Registrarse">
     </form>
     <br>
     <br>

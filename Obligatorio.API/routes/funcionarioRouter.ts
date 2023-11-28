@@ -9,6 +9,6 @@ const funcionarioController = new FuncionarioController();
 router.get('/getFuncionario/:id', funcionarioController.Get);
 router.get('/getFuncionariosANotificar/:id', funcionarioController.GetFuncionariosANotificar);
 router.post('/agendarFuncionario', funcionarioController.Agendar);
-
+router.post('/editFuncionario', funcionarioController.Edit);
 
 export default router

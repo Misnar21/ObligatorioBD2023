@@ -8,7 +8,6 @@ const usuarioController = new UsuarioController();
 // Configura tus rutas aquí
 router.get('/getUsuario/:id', usuarioController.Get);
 router.post('/addUsuario', usuarioController.Add);
-router.post('/editUsuario', usuarioController.Edit);
 
 
 export default router

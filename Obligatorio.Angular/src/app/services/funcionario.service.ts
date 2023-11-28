@@ -16,6 +16,10 @@ export class FuncionarioService
   getAllFuncionarios = () => this.http.get<Funcionario[]>(this.apiUrl);
 
   actualizarDatos(datos: any): Observable<any>{
-    return this.http.post("http://localhost:3000/usuario/editUsuario", datos);
+    return this.http.post("http://localhost:3000/funcionario/editFuncionario", datos);
+  }
+
+  agendar(datos: any): Observable<any>{
+    return this.http.post("http://localhost:3000/funcionario/agendarFuncionario", datos);
   }
 }
